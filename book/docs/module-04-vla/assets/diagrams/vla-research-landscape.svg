@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600">
+  <defs>
+    <linearGradient id="googleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4285F4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1967D2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="berkeleyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#003262;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#002244;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="openaiGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10A37F;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0D8B6D;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="nvidiaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#76B900;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5A9000;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="600" fill="#fafafa"/>
+
+  <!-- Title -->
+  <text x="450" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#333">VLA Research Landscape (2023-2024)</text>
+  <text x="450" y="55" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#666">Major Vision-Language-Action Models and Their Contributions</text>
+
+  <!-- Timeline axis -->
+  <line x1="100" y1="530" x2="800" y2="530" stroke="#ccc" stroke-width="2"/>
+  <text x="150" y="555" font-family="Arial, sans-serif" font-size="11" fill="#666">2022</text>
+  <text x="350" y="555" font-family="Arial, sans-serif" font-size="11" fill="#666">2023</text>
+  <text x="550" y="555" font-family="Arial, sans-serif" font-size="11" fill="#666">2024</text>
+  <text x="750" y="555" font-family="Arial, sans-serif" font-size="11" fill="#666">Future</text>
+
+  <!-- RT-1 (Google) -->
+  <g transform="translate(80, 80)">
+    <rect width="180" height="130" rx="10" fill="url(#googleGrad)"/>
+    <text x="90" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">RT-1</text>
+    <text x="90" y="42" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white" opacity="0.9">Google DeepMind</text>
+    <line x1="10" y1="50" x2="170" y2="50" stroke="white" stroke-opacity="0.3"/>
+    <text x="90" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">First Robotics Transformer</text>
+    <text x="90" y="85" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Image + Text → Actions</text>
+    <text x="90" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">130K robot demos</text>
+    <text x="90" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="white" opacity="0.8">Dec 2022</text>
+  </g>
+
+  <!-- RT-2 (Google) -->
+  <g transform="translate(280, 80)">
+    <rect width="180" height="130" rx="10" fill="url(#googleGrad)"/>
+    <text x="90" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">RT-2</text>
+    <text x="90" y="42" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white" opacity="0.9">Google DeepMind</text>
+    <line x1="10" y1="50" x2="170" y2="50" stroke="white" stroke-opacity="0.3"/>
+    <text x="90" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Web knowledge transfer</text>
+    <text x="90" y="85" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">55B VLM backbone</text>
+    <text x="90" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Emergent reasoning</text>
+    <text x="90" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="white" opacity="0.8">Jul 2023</text>
+  </g>
+
+  <!-- PaLM-E (Google) -->
+  <g transform="translate(480, 80)">
+    <rect width="180" height="130" rx="10" fill="url(#googleGrad)"/>
+    <text x="90" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">PaLM-E</text>
+    <text x="90" y="42" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white" opacity="0.9">Google</text>
+    <line x1="10" y1="50" x2="170" y2="50" stroke="white" stroke-opacity="0.3"/>
+    <text x="90" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">562B parameters</text>
+    <text x="90" y="85" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Multimodal embodied LLM</text>
+    <text x="90" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Planning + reasoning</text>
+    <text x="90" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="white" opacity="0.8">Mar 2023</text>
+  </g>
+
+  <!-- OpenVLA (Berkeley) -->
+  <g transform="translate(80, 240)">
+    <rect width="180" height="130" rx="10" fill="url(#berkeleyGrad)"/>
+    <text x="90" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">OpenVLA</text>
+    <text x="90" y="42" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white" opacity="0.9">UC Berkeley</text>
+    <line x1="10" y1="50" x2="170" y2="50" stroke="white" stroke-opacity="0.3"/>
+    <text x="90" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Open-source VLA</text>
+    <text x="90" y="85" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">7B parameters</text>
+    <text x="90" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Fine-tunable</text>
+    <text x="90" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="white" opacity="0.8">Jun 2024</text>
+  </g>
+
+  <!-- Octo (Berkeley) -->
+  <g transform="translate(280, 240)">
+    <rect width="180" height="130" rx="10" fill="url(#berkeleyGrad)"/>
+    <text x="90" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">Octo</text>
+    <text x="90" y="42" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white" opacity="0.9">UC Berkeley</text>
+    <line x1="10" y1="50" x2="170" y2="50" stroke="white" stroke-opacity="0.3"/>
+    <text x="90" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Generalist policy</text>
+    <text x="90" y="85" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Open X-Embodiment</text>
+    <text x="90" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Multi-robot training</text>
+    <text x="90" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="white" opacity="0.8">2024</text>
+  </g>
+
+  <!-- GR00T (NVIDIA) -->
+  <g transform="translate(480, 240)">
+    <rect width="180" height="130" rx="10" fill="url(#nvidiaGrad)"/>
+    <text x="90" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">GR00T</text>
+    <text x="90" y="42" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white" opacity="0.9">NVIDIA</text>
+    <line x1="10" y1="50" x2="170" y2="50" stroke="white" stroke-opacity="0.3"/>
+    <text x="90" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Humanoid foundation</text>
+    <text x="90" y="85" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Isaac Sim training</text>
+    <text x="90" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Whole-body control</text>
+    <text x="90" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="white" opacity="0.8">Mar 2024</text>
+  </g>
+
+  <!-- Key Approaches Section -->
+  <g transform="translate(680, 80)">
+    <rect width="190" height="290" rx="10" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="2"/>
+    <text x="95" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#333">Key Approaches</text>
+    <line x1="10" y1="35" x2="180" y2="35" stroke="#E0E0E0"/>
+
+    <rect x="10" y="45" width="170" height="50" rx="5" fill="#E3F2FD"/>
+    <text x="95" y="65" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#1565C0">Vision Encoders</text>
+    <text x="95" y="82" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#333">ViT, CLIP, SigLIP</text>
+
+    <rect x="10" y="105" width="170" height="50" rx="5" fill="#E8F5E9"/>
+    <text x="95" y="125" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#2E7D32">Language Backbone</text>
+    <text x="95" y="142" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#333">LLaMA, PaLM, GPT</text>
+
+    <rect x="10" y="165" width="170" height="50" rx="5" fill="#FFF3E0"/>
+    <text x="95" y="185" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#E65100">Action Space</text>
+    <text x="95" y="202" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#333">Discrete tokens, diffusion</text>
+
+    <rect x="10" y="225" width="170" height="50" rx="5" fill="#FCE4EC"/>
+    <text x="95" y="245" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#C2185B">Training Data</text>
+    <text x="95" y="262" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#333">Robot demos + web data</text>
+  </g>
+
+  <!-- Timeline markers -->
+  <circle cx="150" cy="530" r="6" fill="#4285F4"/>
+  <circle cx="350" cy="530" r="6" fill="#4285F4"/>
+  <circle cx="400" cy="530" r="6" fill="#4285F4"/>
+  <circle cx="500" cy="530" r="6" fill="#003262"/>
+  <circle cx="600" cy="530" r="6" fill="#76B900"/>
+
+  <!-- Trends arrow -->
+  <g transform="translate(80, 400)">
+    <rect width="580" height="80" rx="10" fill="#FFFDE7" stroke="#FBC02D" stroke-width="2"/>
+    <text x="290" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#F57F17">Emerging Trends</text>
+    <text x="145" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#333">Smaller, efficient models</text>
+    <text x="290" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#333">Open-source ecosystem</text>
+    <text x="435" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#333">Cross-embodiment</text>
+    <text x="145" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#333">Real-time inference</text>
+    <text x="290" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#333">Sim-to-real transfer</text>
+    <text x="435" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#333">Humanoid-specific</text>
+  </g>
+</svg>

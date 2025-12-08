@@ -1,0 +1,14 @@
+{
+  "position": 3,
+  "label": "Module 3: AI-Robot Brain",
+  "collapsible": true,
+  "collapsed": false,
+  "className": "module-3-sidebar",
+  "link": {
+    "type": "doc",
+    "id": "module-03-ai-robot-brain/index"
+  },
+  "customProps": {
+    "description": "NVIDIA Isaac for perception, simulation, and navigation"
+  }
+}

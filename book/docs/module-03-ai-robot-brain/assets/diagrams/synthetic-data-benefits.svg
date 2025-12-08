@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <defs>
+    <linearGradient id="realGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF5722;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E64A19;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="synthGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4CAF50;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#388E3C;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Title -->
+  <text x="400" y="30" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#333">Real Data vs Synthetic Data</text>
+
+  <!-- Real Data Column -->
+  <rect x="50" y="60" width="300" height="300" rx="10" fill="#fff5f5" stroke="#FF5722" stroke-width="2"/>
+  <rect x="50" y="60" width="300" height="40" rx="10" fill="url(#realGrad)"/>
+  <text x="200" y="87" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="white">Real Data</text>
+
+  <text x="200" y="125" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#E64A19">Challenges</text>
+
+  <text x="70" y="150" font-family="Arial, sans-serif" font-size="11" fill="#333">❌ Expensive to collect</text>
+  <text x="70" y="170" font-family="Arial, sans-serif" font-size="11" fill="#333">❌ Time-consuming labeling</text>
+  <text x="70" y="190" font-family="Arial, sans-serif" font-size="11" fill="#333">❌ Limited edge cases</text>
+  <text x="70" y="210" font-family="Arial, sans-serif" font-size="11" fill="#333">❌ Privacy concerns</text>
+  <text x="70" y="230" font-family="Arial, sans-serif" font-size="11" fill="#333">❌ Hardware wear/damage risk</text>
+  <text x="70" y="250" font-family="Arial, sans-serif" font-size="11" fill="#333">❌ Weather/lighting dependency</text>
+
+  <text x="200" y="280" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#388E3C">Strengths</text>
+  <text x="70" y="305" font-family="Arial, sans-serif" font-size="11" fill="#333">✓ Perfect domain match</text>
+  <text x="70" y="325" font-family="Arial, sans-serif" font-size="11" fill="#333">✓ Real-world complexity</text>
+  <text x="70" y="345" font-family="Arial, sans-serif" font-size="11" fill="#333">✓ Ground truth validation</text>
+
+  <!-- Synthetic Data Column -->
+  <rect x="450" y="60" width="300" height="300" rx="10" fill="#f5fff5" stroke="#4CAF50" stroke-width="2"/>
+  <rect x="450" y="60" width="300" height="40" rx="10" fill="url(#synthGrad)"/>
+  <text x="600" y="87" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="white">Synthetic Data</text>
+
+  <text x="600" y="125" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#388E3C">Advantages</text>
+
+  <text x="470" y="150" font-family="Arial, sans-serif" font-size="11" fill="#333">✓ Unlimited data generation</text>
+  <text x="470" y="170" font-family="Arial, sans-serif" font-size="11" fill="#333">✓ Automatic perfect labels</text>
+  <text x="470" y="190" font-family="Arial, sans-serif" font-size="11" fill="#333">✓ Any scenario possible</text>
+  <text x="470" y="210" font-family="Arial, sans-serif" font-size="11" fill="#333">✓ No privacy issues</text>
+  <text x="470" y="230" font-family="Arial, sans-serif" font-size="11" fill="#333">✓ Safe edge case testing</text>
+  <text x="470" y="250" font-family="Arial, sans-serif" font-size="11" fill="#333">✓ Control all parameters</text>
+
+  <text x="600" y="280" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#E64A19">Challenges</text>
+  <text x="470" y="305" font-family="Arial, sans-serif" font-size="11" fill="#333">⚠ Domain gap</text>
+  <text x="470" y="325" font-family="Arial, sans-serif" font-size="11" fill="#333">⚠ May miss real complexity</text>
+  <text x="470" y="345" font-family="Arial, sans-serif" font-size="11" fill="#333">⚠ Requires sim setup</text>
+
+  <!-- Arrow between -->
+  <text x="400" y="200" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#666">+</text>
+  <text x="400" y="230" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#666">Best results:</text>
+  <text x="400" y="245" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#666">combine both</text>
+</svg>

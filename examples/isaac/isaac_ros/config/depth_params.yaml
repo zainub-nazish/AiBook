@@ -1,0 +1,96 @@
+# Isaac ROS Depth Processing Configuration
+# Reference: https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_image_pipeline/
+
+# =========================================
+# Rectification Node
+# =========================================
+rectify_node:
+  ros__parameters:
+    # Output image dimensions
+    output_width: 640
+    output_height: 480
+
+    # Interpolation method
+    # 0 = INTER_NEAREST, 1 = INTER_LINEAR, 2 = INTER_CUBIC
+    interpolation: 1
+
+# =========================================
+# Disparity Node (Stereo Matching)
+# =========================================
+disparity_node:
+  ros__parameters:
+    # Maximum disparity value (pixels)
+    # Higher = longer range, but slower
+    max_disparity: 64.0
+
+    # Backend selection
+    # Options: "CUDA" for GPU acceleration
+    backends: "CUDA"
+
+    # Confidence threshold (0-255)
+    # Higher = more strict matching
+    confidence_threshold: 200
+
+# =========================================
+# Disparity to Depth Conversion
+# =========================================
+disparity_to_depth_node:
+  ros__parameters:
+    # Depth output in meters
+    # Formula: depth = (focal_length * baseline) / disparity
+    # These are typically from camera calibration
+    # baseline: 0.1  # meters
+
+# =========================================
+# Point Cloud Generation
+# =========================================
+point_cloud_xyz_node:
+  ros__parameters:
+    # Skip factor (1 = every pixel, 2 = every other pixel)
+    # Higher skip = faster but sparser cloud
+    skip: 1
+
+    # Use RGB coloring
+    use_color: true
+
+    # Queue sizes
+    queue_size: 5
+
+point_cloud_xyzrgb_node:
+  ros__parameters:
+    skip: 1
+    use_color: true
+
+# =========================================
+# Depth to LaserScan (for Nav2)
+# =========================================
+depthimage_to_laserscan_node:
+  ros__parameters:
+    # Scan parameters
+    scan_height: 1  # Number of rows to use
+    scan_time: 0.033  # Expected time between scans
+    range_min: 0.1  # meters
+    range_max: 10.0  # meters
+
+    # Output frame
+    output_frame: "base_link"
+
+    # Angular range
+    # Default: -pi/2 to pi/2 (90 degrees each side)
+
+# =========================================
+# Performance Notes
+# =========================================
+# GPU Memory Usage (approximate):
+# - Rectification: ~50MB
+# - Disparity (SGM): ~200MB
+# - Point Cloud: ~100MB
+#
+# Latency (640x480 @ 30fps):
+# - CPU pipeline: ~50ms total
+# - GPU pipeline: ~5ms total (NITROS)
+#
+# For best performance:
+# 1. Use ComposableNodeContainer for NITROS
+# 2. Keep all nodes in same container
+# 3. Use CUDA backend for disparity

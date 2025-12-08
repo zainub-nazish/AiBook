@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 350" width="700" height="350">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#555"/>
+    </marker>
+    <linearGradient id="senseGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4CAF50;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#388E3C;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="perceiveGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2196F3;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1976D2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="decideGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF9800;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F57C00;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="actGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#F44336;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D32F2F;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Title -->
+  <text x="350" y="30" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#333">The Sense-Plan-Act Cycle</text>
+
+  <!-- Circular arrangement -->
+  <!-- SENSE -->
+  <circle cx="180" cy="120" r="60" fill="url(#senseGrad)"/>
+  <text x="180" y="115" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="white">SENSE</text>
+  <text x="180" y="135" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">Gather Data</text>
+
+  <!-- Arrow Sense to Perceive -->
+  <path d="M 240 100 Q 300 70 360 100" stroke="#555" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- PERCEIVE -->
+  <circle cx="520" cy="120" r="60" fill="url(#perceiveGrad)"/>
+  <text x="520" y="115" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="white">PERCEIVE</text>
+  <text x="520" y="135" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">Understand World</text>
+
+  <!-- Arrow Perceive to Decide -->
+  <path d="M 520 180 Q 520 230 450 260" stroke="#555" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- DECIDE -->
+  <circle cx="400" cy="280" r="60" fill="url(#decideGrad)"/>
+  <text x="400" y="275" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="white">DECIDE</text>
+  <text x="400" y="295" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">Plan Action</text>
+
+  <!-- Arrow Decide to Act -->
+  <path d="M 340 270 Q 280 250 240 200" stroke="#555" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- ACT -->
+  <circle cx="180" cy="220" r="50" fill="url(#actGrad)"/>
+  <text x="180" y="215" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="white">ACT</text>
+  <text x="180" y="235" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">Move</text>
+
+  <!-- Arrow Act back to Sense -->
+  <path d="M 145 175 Q 120 145 145 115" stroke="#555" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Center label -->
+  <text x="350" y="195" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#666">Continuous Loop</text>
+
+  <!-- Details box -->
+  <rect x="50" y="300" width="600" height="40" rx="5" fill="#f5f5f5" stroke="#ddd"/>
+  <text x="130" y="325" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#4CAF50">Cameras, LiDAR</text>
+  <text x="280" y="325" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#2196F3">VSLAM, Mapping</text>
+  <text x="420" y="325" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FF9800">Path Planning</text>
+  <text x="550" y="325" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#F44336">Motor Commands</text>
+</svg>

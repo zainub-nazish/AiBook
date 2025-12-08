@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 550">
+  <defs>
+    <linearGradient id="googleBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4285F4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1967D2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="googleGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#34A853;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1E8E3E;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="googleYellow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FBBC05;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F9AB00;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="googleRed" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#EA4335;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#C5221F;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="850" height="550" fill="#fafafa"/>
+
+  <!-- Title -->
+  <text x="425" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#333">RT-2: Robotics Transformer 2</text>
+  <text x="425" y="55" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#666">Google DeepMind, 2023 - Vision-Language-Action Model</text>
+
+  <!-- Input Section -->
+  <g transform="translate(30, 80)">
+    <text x="90" y="0" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#4285F4">Inputs</text>
+
+    <!-- Camera Image -->
+    <rect x="20" y="15" width="140" height="100" rx="8" fill="url(#googleBlue)"/>
+    <text x="90" y="45" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Camera Image</text>
+    <rect x="35" y="55" width="110" height="50" rx="4" fill="white" fill-opacity="0.3"/>
+    <text x="90" y="75" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">RGB Frame</text>
+    <text x="90" y="90" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">320x256 pixels</text>
+
+    <!-- Language Instruction -->
+    <rect x="20" y="130" width="140" height="80" rx="8" fill="url(#googleGreen)"/>
+    <text x="90" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Language</text>
+    <text x="90" y="175" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">"Pick up the can"</text>
+    <text x="90" y="195" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white" opacity="0.8">Natural language task</text>
+  </g>
+
+  <!-- Vision Encoder -->
+  <g transform="translate(220, 95)">
+    <rect width="140" height="180" rx="10" fill="#E3F2FD" stroke="#4285F4" stroke-width="2"/>
+    <text x="70" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#4285F4">Vision Encoder</text>
+    <line x1="10" y1="35" x2="130" y2="35" stroke="#4285F4" stroke-opacity="0.3"/>
+    <text x="70" y="55" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#333">ViT-G/14</text>
+    <text x="70" y="75" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#333">2B parameters</text>
+    <rect x="15" y="90" width="110" height="40" rx="5" fill="#BBDEFB"/>
+    <text x="70" y="108" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#1565C0">Image Tokens</text>
+    <text x="70" y="122" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#1565C0">256 tokens</text>
+    <text x="70" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Pre-trained on</text>
+    <text x="70" y="165" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">web images</text>
+  </g>
+
+  <!-- Large Language Model -->
+  <g transform="translate(410, 80)">
+    <rect width="200" height="210" rx="12" fill="url(#googleYellow)"/>
+    <text x="100" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">PaLI-X (55B)</text>
+    <text x="100" y="48" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white" opacity="0.9">Vision-Language Model</text>
+    <line x1="15" y1="60" x2="185" y2="60" stroke="white" stroke-opacity="0.4"/>
+
+    <rect x="15" y="70" width="170" height="50" rx="5" fill="white" fill-opacity="0.2"/>
+    <text x="100" y="90" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Multimodal Attention</text>
+    <text x="100" y="108" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white" opacity="0.8">Vision + Language fusion</text>
+
+    <rect x="15" y="130" width="170" height="50" rx="5" fill="white" fill-opacity="0.2"/>
+    <text x="100" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Web Knowledge</text>
+    <text x="100" y="168" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white" opacity="0.8">Internet-scale training</text>
+
+    <text x="100" y="198" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Outputs action tokens</text>
+  </g>
+
+  <!-- Action Decoder -->
+  <g transform="translate(660, 110)">
+    <rect width="140" height="160" rx="10" fill="url(#googleRed)"/>
+    <text x="70" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Action Tokens</text>
+    <line x1="10" y1="38" x2="130" y2="38" stroke="white" stroke-opacity="0.3"/>
+
+    <text x="70" y="60" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">7 DoF Actions:</text>
+    <text x="70" y="80" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white" opacity="0.9">x, y, z position</text>
+    <text x="70" y="95" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white" opacity="0.9">roll, pitch, yaw</text>
+    <text x="70" y="110" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white" opacity="0.9">gripper open/close</text>
+
+    <rect x="15" y="125" width="110" height="25" rx="4" fill="white" fill-opacity="0.2"/>
+    <text x="70" y="142" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">256 discrete bins</text>
+  </g>
+
+  <!-- Arrows -->
+  <defs>
+    <marker id="arrowBlue3" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#4285F4"/>
+    </marker>
+    <marker id="arrowYellow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#F9AB00"/>
+    </marker>
+  </defs>
+
+  <path d="M 190 145 L 220 145" fill="none" stroke="#4285F4" stroke-width="2" marker-end="url(#arrowBlue3)"/>
+  <path d="M 190 205 Q 205 185 220 185" fill="none" stroke="#34A853" stroke-width="2"/>
+  <path d="M 360 185 L 410 185" fill="none" stroke="#4285F4" stroke-width="2" marker-end="url(#arrowBlue3)"/>
+  <path d="M 610 185 L 660 185" fill="none" stroke="#F9AB00" stroke-width="2" marker-end="url(#arrowYellow)"/>
+
+  <!-- Key Insight Box -->
+  <g transform="translate(30, 320)">
+    <rect width="790" height="90" rx="10" fill="#E8F5E9" stroke="#34A853" stroke-width="2"/>
+    <text x="395" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1E8E3E">Key Innovation: Web Knowledge Transfer</text>
+    <text x="395" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#333">RT-2 leverages internet-scale pre-training (images, text, code) to understand novel concepts</text>
+    <text x="395" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#333">Example: Can pick up "Taylor Swift" without explicit training on celebrity recognition</text>
+    <text x="395" y="85" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#666" font-style="italic">This transfers reasoning capabilities from web data to physical robot actions</text>
+  </g>
+
+  <!-- Performance Stats -->
+  <g transform="translate(30, 430)">
+    <rect width="250" height="100" rx="8" fill="#FFF3E0" stroke="#F57C00" stroke-width="1"/>
+    <text x="125" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#E65100">Performance</text>
+    <text x="125" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#333">Seen tasks: 97% success</text>
+    <text x="125" y="68" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#333">Unseen objects: 76% success</text>
+    <text x="125" y="86" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#333">Novel instructions: 3x better</text>
+  </g>
+
+  <g transform="translate(300, 430)">
+    <rect width="250" height="100" rx="8" fill="#E3F2FD" stroke="#1976D2" stroke-width="1"/>
+    <text x="125" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#1565C0">Model Sizes</text>
+    <text x="125" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#333">RT-2-PaLI-X: 55B params</text>
+    <text x="125" y="68" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#333">RT-2-PaLM-E: 12B params</text>
+    <text x="125" y="86" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#333">Trained on robot demos + web</text>
+  </g>
+
+  <g transform="translate(570, 430)">
+    <rect width="250" height="100" rx="8" fill="#FCE4EC" stroke="#C2185B" stroke-width="1"/>
+    <text x="125" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#AD1457">Emergent Capabilities</text>
+    <text x="125" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#333">Symbol understanding</text>
+    <text x="125" y="68" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#333">Reasoning about objects</text>
+    <text x="125" y="86" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#333">Multi-step planning</text>
+  </g>
+</svg>

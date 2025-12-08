@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" width="900" height="400">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+    </marker>
+    <linearGradient id="sensorGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4CAF50;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#388E3C;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="perceptionGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2196F3;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1976D2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="mappingGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#9C27B0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7B1FA2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="locGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF9800;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F57C00;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="navGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#F44336;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D32F2F;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Title -->
+  <text x="450" y="30" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#333">Robot Perception Pipeline</text>
+
+  <!-- Stage 1: Sensors -->
+  <rect x="20" y="60" width="140" height="100" rx="10" fill="url(#sensorGrad)"/>
+  <text x="90" y="95" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="white">SENSORS</text>
+  <text x="90" y="115" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">Camera</text>
+  <text x="90" y="130" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">LiDAR</text>
+  <text x="90" y="145" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">IMU</text>
+
+  <!-- Arrow 1 -->
+  <line x1="160" y1="110" x2="185" y2="110" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="172" y="100" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#666">Raw Data</text>
+
+  <!-- Stage 2: Perception (VSLAM/Depth) -->
+  <rect x="190" y="60" width="140" height="100" rx="10" fill="url(#perceptionGrad)"/>
+  <text x="260" y="90" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="white">PERCEPTION</text>
+  <text x="260" y="110" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">VSLAM</text>
+  <text x="260" y="125" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">Depth Processing</text>
+  <text x="260" y="140" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">Point Clouds</text>
+
+  <!-- Arrow 2 -->
+  <line x1="330" y1="110" x2="355" y2="110" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="342" y="100" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#666">3D Data</text>
+
+  <!-- Stage 3: Mapping -->
+  <rect x="360" y="60" width="140" height="100" rx="10" fill="url(#mappingGrad)"/>
+  <text x="430" y="90" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="white">MAPPING</text>
+  <text x="430" y="110" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">Occupancy Grid</text>
+  <text x="430" y="125" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">3D Voxels</text>
+  <text x="430" y="140" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">nvblox/TSDF</text>
+
+  <!-- Arrow 3 -->
+  <line x1="500" y1="110" x2="525" y2="110" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="512" y="100" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#666">Map</text>
+
+  <!-- Stage 4: Localization -->
+  <rect x="530" y="60" width="140" height="100" rx="10" fill="url(#locGrad)"/>
+  <text x="600" y="90" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="white">LOCALIZATION</text>
+  <text x="600" y="110" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">Pose Estimation</text>
+  <text x="600" y="125" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">TF Transforms</text>
+  <text x="600" y="140" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">"Where am I?"</text>
+
+  <!-- Arrow 4 -->
+  <line x1="670" y1="110" x2="695" y2="110" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="682" y="100" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#666">Pose</text>
+
+  <!-- Stage 5: Navigation -->
+  <rect x="700" y="60" width="140" height="100" rx="10" fill="url(#navGrad)"/>
+  <text x="770" y="90" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="white">NAVIGATION</text>
+  <text x="770" y="110" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">Path Planning</text>
+  <text x="770" y="125" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">Costmaps</text>
+  <text x="770" y="140" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">Nav2</text>
+
+  <!-- Output -->
+  <rect x="700" y="200" width="140" height="60" rx="10" fill="#607D8B" stroke="#455A64" stroke-width="2"/>
+  <text x="770" y="225" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="white">MOTION</text>
+  <text x="770" y="245" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">cmd_vel</text>
+
+  <!-- Arrow to motion -->
+  <line x1="770" y1="160" x2="770" y2="195" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- Data flow labels at bottom -->
+  <rect x="20" y="300" width="860" height="80" rx="5" fill="#f5f5f5" stroke="#ddd"/>
+  <text x="450" y="325" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">Data Flow Types</text>
+  <text x="100" y="355" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#4CAF50">Images, PointCloud2</text>
+  <text x="260" y="355" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#2196F3">Features, Depth</text>
+  <text x="430" y="355" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#9C27B0">OccupancyGrid, Mesh</text>
+  <text x="600" y="355" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#FF9800">PoseStamped, TF</text>
+  <text x="770" y="355" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#F44336">Twist (cmd_vel)</text>
+</svg>

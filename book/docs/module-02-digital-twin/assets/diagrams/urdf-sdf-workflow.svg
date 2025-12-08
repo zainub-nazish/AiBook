@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 450" width="900" height="450">
+  <defs>
+    <linearGradient id="urdfGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3498db;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2980b9;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="sdfGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e74c3c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c0392b;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="toolGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#9b59b6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8e44ad;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="gazeboGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#27ae60;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e8449;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#7f8c8d"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#27ae60"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="450" fill="#f8f9fa"/>
+
+  <!-- Title -->
+  <text x="450" y="35" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#2c3e50" text-anchor="middle">URDF to SDF Conversion Workflow</text>
+  <text x="450" y="55" font-family="Arial, sans-serif" font-size="12" fill="#7f8c8d" text-anchor="middle">Model Format Conversion for Gazebo Simulation</text>
+
+  <!-- URDF Source Box -->
+  <rect x="30" y="100" width="180" height="180" rx="10" fill="url(#urdfGrad)" filter="url(#shadow)"/>
+  <text x="120" y="130" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white" text-anchor="middle">URDF</text>
+  <text x="120" y="148" font-family="Arial, sans-serif" font-size="10" fill="white" fill-opacity="0.8" text-anchor="middle">Unified Robot Description</text>
+
+  <rect x="45" y="160" width="150" height="25" rx="3" fill="white" fill-opacity="0.9"/>
+  <text x="120" y="177" font-family="Arial, sans-serif" font-size="10" fill="#333" text-anchor="middle">&lt;robot&gt;</text>
+
+  <rect x="45" y="190" width="150" height="25" rx="3" fill="white" fill-opacity="0.9"/>
+  <text x="120" y="207" font-family="Arial, sans-serif" font-size="10" fill="#333" text-anchor="middle">&lt;link&gt; + &lt;joint&gt;</text>
+
+  <rect x="45" y="220" width="150" height="25" rx="3" fill="white" fill-opacity="0.9"/>
+  <text x="120" y="237" font-family="Arial, sans-serif" font-size="10" fill="#333" text-anchor="middle">&lt;visual&gt; + &lt;collision&gt;</text>
+
+  <text x="120" y="265" font-family="Arial, sans-serif" font-size="9" fill="white" text-anchor="middle">ROS Standard Format</text>
+
+  <!-- Conversion Tool Box -->
+  <rect x="280" y="120" width="160" height="140" rx="10" fill="url(#toolGrad)" filter="url(#shadow)"/>
+  <text x="360" y="150" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">gz sdf -p</text>
+  <text x="360" y="168" font-family="Arial, sans-serif" font-size="10" fill="white" fill-opacity="0.8" text-anchor="middle">Conversion Tool</text>
+
+  <rect x="295" y="180" width="130" height="65" rx="3" fill="white" fill-opacity="0.9"/>
+  <text x="360" y="198" font-family="Arial, sans-serif" font-size="9" fill="#333" text-anchor="middle">• Parse URDF XML</text>
+  <text x="360" y="212" font-family="Arial, sans-serif" font-size="9" fill="#333" text-anchor="middle">• Convert elements</text>
+  <text x="360" y="226" font-family="Arial, sans-serif" font-size="9" fill="#333" text-anchor="middle">• Add physics tags</text>
+  <text x="360" y="240" font-family="Arial, sans-serif" font-size="9" fill="#333" text-anchor="middle">• Output SDF 1.10</text>
+
+  <!-- SDF Output Box -->
+  <rect x="510" y="100" width="180" height="180" rx="10" fill="url(#sdfGrad)" filter="url(#shadow)"/>
+  <text x="600" y="130" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white" text-anchor="middle">SDF</text>
+  <text x="600" y="148" font-family="Arial, sans-serif" font-size="10" fill="white" fill-opacity="0.8" text-anchor="middle">Simulation Description</text>
+
+  <rect x="525" y="160" width="150" height="25" rx="3" fill="white" fill-opacity="0.9"/>
+  <text x="600" y="177" font-family="Arial, sans-serif" font-size="10" fill="#333" text-anchor="middle">&lt;model&gt;</text>
+
+  <rect x="525" y="190" width="150" height="25" rx="3" fill="white" fill-opacity="0.9"/>
+  <text x="600" y="207" font-family="Arial, sans-serif" font-size="10" fill="#333" text-anchor="middle">&lt;link&gt; + &lt;joint&gt;</text>
+
+  <rect x="525" y="220" width="150" height="25" rx="3" fill="white" fill-opacity="0.9"/>
+  <text x="600" y="237" font-family="Arial, sans-serif" font-size="10" fill="#333" text-anchor="middle">&lt;physics&gt; + &lt;sensor&gt;</text>
+
+  <text x="600" y="265" font-family="Arial, sans-serif" font-size="9" fill="white" text-anchor="middle">Gazebo Native Format</text>
+
+  <!-- Gazebo Box -->
+  <rect x="760" y="120" width="120" height="140" rx="10" fill="url(#gazeboGrad)" filter="url(#shadow)"/>
+  <text x="820" y="155" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">Gazebo</text>
+  <text x="820" y="175" font-family="Arial, sans-serif" font-size="10" fill="white" fill-opacity="0.8" text-anchor="middle">Harmonic</text>
+
+  <rect x="770" y="190" width="100" height="55" rx="3" fill="white" fill-opacity="0.9"/>
+  <text x="820" y="208" font-family="Arial, sans-serif" font-size="9" fill="#333" text-anchor="middle">Simulation</text>
+  <text x="820" y="222" font-family="Arial, sans-serif" font-size="9" fill="#333" text-anchor="middle">Physics</text>
+  <text x="820" y="236" font-family="Arial, sans-serif" font-size="9" fill="#333" text-anchor="middle">Rendering</text>
+
+  <!-- Arrows -->
+  <line x1="210" y1="190" x2="270" y2="190" stroke="#7f8c8d" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="440" y1="190" x2="500" y2="190" stroke="#7f8c8d" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="690" y1="190" x2="750" y2="190" stroke="#27ae60" stroke-width="3" marker-end="url(#arrowGreen)"/>
+
+  <!-- Command examples -->
+  <rect x="30" y="310" width="420" height="120" rx="8" fill="#2c3e50" filter="url(#shadow)"/>
+  <text x="45" y="335" font-family="monospace" font-size="12" fill="#27ae60"># Convert URDF to SDF</text>
+  <text x="45" y="355" font-family="monospace" font-size="12" fill="white">gz sdf -p robot.urdf &gt; robot.sdf</text>
+  <text x="45" y="385" font-family="monospace" font-size="12" fill="#27ae60"># Validate SDF file</text>
+  <text x="45" y="405" font-family="monospace" font-size="12" fill="white">gz sdf -k robot.sdf</text>
+
+  <!-- Comparison table -->
+  <rect x="470" y="310" width="410" height="120" rx="8" fill="white" stroke="#bdc3c7" filter="url(#shadow)"/>
+  <text x="675" y="332" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#2c3e50" text-anchor="middle">Format Comparison</text>
+
+  <!-- Table headers -->
+  <line x1="470" y1="345" x2="880" y2="345" stroke="#bdc3c7"/>
+  <text x="540" y="360" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#3498db" text-anchor="middle">URDF</text>
+  <text x="675" y="360" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#7f8c8d" text-anchor="middle">Feature</text>
+  <text x="810" y="360" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#e74c3c" text-anchor="middle">SDF</text>
+
+  <line x1="470" y1="368" x2="880" y2="368" stroke="#ecf0f1"/>
+  <text x="540" y="382" font-family="Arial, sans-serif" font-size="9" fill="#333" text-anchor="middle">Single robot</text>
+  <text x="675" y="382" font-family="Arial, sans-serif" font-size="9" fill="#333" text-anchor="middle">Scope</text>
+  <text x="810" y="382" font-family="Arial, sans-serif" font-size="9" fill="#333" text-anchor="middle">World + models</text>
+
+  <line x1="470" y1="390" x2="880" y2="390" stroke="#ecf0f1"/>
+  <text x="540" y="404" font-family="Arial, sans-serif" font-size="9" fill="#333" text-anchor="middle">Limited</text>
+  <text x="675" y="404" font-family="Arial, sans-serif" font-size="9" fill="#333" text-anchor="middle">Physics</text>
+  <text x="810" y="404" font-family="Arial, sans-serif" font-size="9" fill="#333" text-anchor="middle">Full control</text>
+
+  <line x1="470" y1="412" x2="880" y2="412" stroke="#ecf0f1"/>
+  <text x="540" y="425" font-family="Arial, sans-serif" font-size="9" fill="#333" text-anchor="middle">None</text>
+  <text x="675" y="425" font-family="Arial, sans-serif" font-size="9" fill="#333" text-anchor="middle">Sensors</text>
+  <text x="810" y="425" font-family="Arial, sans-serif" font-size="9" fill="#333" text-anchor="middle">Built-in support</text>
+
+  <!-- Vertical separators in table -->
+  <line x1="610" y1="345" x2="610" y2="430" stroke="#ecf0f1"/>
+  <line x1="740" y1="345" x2="740" y2="430" stroke="#ecf0f1"/>
+</svg>

@@ -1,0 +1,10 @@
+{
+  "label": "Module 2: The Digital Twin",
+  "position": 3,
+  "link": {
+    "type": "doc",
+    "id": "module-02-digital-twin/index"
+  },
+  "collapsible": true,
+  "collapsed": true
+}

@@ -1,0 +1,163 @@
+<?xml version="1.0" ?>
+<!--
+  Physics Configuration Demo
+  Module 2: The Digital Twin - Chapter 1
+
+  This world demonstrates physics engine configuration:
+  - Different physics engines (ODE, DART, Bullet)
+  - Step size configuration
+  - Real-time factor
+  - Gravity modification
+-->
+<sdf version="1.10">
+  <world name="physics_config_demo">
+
+    <!--
+      Physics Engine Configuration
+
+      Available engines:
+      - ode: Open Dynamics Engine (default, good general purpose)
+      - dart: Dynamic Animation and Robotics Toolkit (better for articulated bodies)
+      - bullet: Bullet Physics (good for games/real-time)
+
+      Key parameters:
+      - max_step_size: Physics timestep (smaller = more accurate, slower)
+      - real_time_factor: 1.0 = real-time, 0.5 = half speed, 2.0 = double speed
+      - real_time_update_rate: Target physics updates per second
+    -->
+    <physics type="ode">
+      <!-- Simulation timestep: 1ms (1000 Hz) -->
+      <max_step_size>0.001</max_step_size>
+
+      <!-- Real-time factor: 1.0 means simulation runs at real-world speed -->
+      <real_time_factor>1.0</real_time_factor>
+
+      <!-- Target update rate in Hz -->
+      <real_time_update_rate>1000</real_time_update_rate>
+
+      <!-- ODE-specific settings -->
+      <ode>
+        <solver>
+          <type>quick</type>
+          <iters>50</iters>
+          <sor>1.3</sor>
+        </solver>
+        <constraints>
+          <cfm>0</cfm>
+          <erp>0.2</erp>
+          <contact_max_correcting_vel>100</contact_max_correcting_vel>
+          <contact_surface_layer>0.001</contact_surface_layer>
+        </constraints>
+      </ode>
+    </physics>
+
+    <!--
+      Gravity Configuration
+
+      Default: 0 0 -9.81 (Earth gravity, Z-down)
+
+      Examples:
+      - Moon: 0 0 -1.62
+      - Mars: 0 0 -3.71
+      - Zero-G: 0 0 0
+      - Horizontal: 9.81 0 0 (objects fall sideways!)
+    -->
+    <gravity>0 0 -9.81</gravity>
+
+    <!-- Lighting -->
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <!-- Ground Plane -->
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.7 1</ambient>
+            <diffuse>0.7 0.7 0.7 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Test object: Drop from height to verify gravity -->
+    <model name="test_sphere">
+      <pose>0 0 2 0 0 0</pose>
+      <link name="link">
+        <inertial>
+          <mass>1.0</mass>
+          <inertia>
+            <ixx>0.004</ixx>
+            <iyy>0.004</iyy>
+            <izz>0.004</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>0.1</radius>
+            </sphere>
+          </geometry>
+          <surface>
+            <bounce>
+              <restitution_coefficient>0.5</restitution_coefficient>
+              <threshold>0.01</threshold>
+            </bounce>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>0.1</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.9 0.5 0.1 1</ambient>
+            <diffuse>0.9 0.5 0.1 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!--
+      Exercise: Try changing these parameters and observe the effects:
+
+      1. Change max_step_size to 0.01 (10x larger)
+         - Objects may pass through each other
+         - Less accurate physics
+
+      2. Change real_time_factor to 0.1
+         - Simulation runs 10x slower
+         - Good for debugging
+
+      3. Change gravity to 0 0 -1.62 (Moon)
+         - Objects fall much slower
+         - Bounces are higher
+
+      4. Add restitution_coefficient > 1.0
+         - Objects bounce higher each time (energy gain!)
+         - Unrealistic but fun to watch
+    -->
+
+  </world>
+</sdf>

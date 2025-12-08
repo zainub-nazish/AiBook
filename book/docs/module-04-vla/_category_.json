@@ -1,0 +1,8 @@
+{
+  "label": "Module 4: Vision-Language-Action",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "description": "Learn how Vision-Language-Action (VLA) models represent the convergence of Large Language Models and robotics. Build voice-controlled humanoid pipelines using Whisper, LLMs, and ROS 2."
+  }
+}

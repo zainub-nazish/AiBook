@@ -1,0 +1,733 @@
+---
+id: chapter-01-gazebo-physics
+title: "Chapter 1: Physics Simulation in Gazebo"
+sidebar_label: "1. Gazebo Physics"
+sidebar_position: 1
+description: "Learn to create physics-based simulation worlds in Gazebo Harmonic for testing humanoid robot behaviors"
+keywords: [gazebo, physics simulation, SDF, digital twin, robotics simulation]
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Chapter 1: Physics Simulation in Gazebo
+
+## Learning Objectives
+
+By the end of this chapter, you will be able to:
+
+- [ ] Understand Gazebo Harmonic's architecture and role in robot simulation
+- [ ] Create SDF world files with proper physics configuration
+- [ ] Configure physics properties including gravity, friction, and restitution
+- [ ] Load and position robot models in simulation worlds
+- [ ] Verify physics behavior through practical tests
+
+## Prerequisites
+
+Before starting this chapter, ensure you have:
+
+- **Gazebo Harmonic** installed (see [Gazebo Installation Guide](https://gazebosim.org/docs/harmonic/install))
+- **ROS 2 Humble** with `ros_gz_bridge` package
+- Completed Module 1: ROS 2 Fundamentals
+- Basic understanding of XML syntax
+- Familiarity with 3D coordinate systems
+
+:::tip Verify Installation
+Run `gz sim --version` to confirm Gazebo Harmonic is installed. You should see version 8.x or higher.
+:::
+
+---
+
+## 1. Introduction to Gazebo Harmonic
+
+**Gazebo** is the industry-standard physics simulator for robotics research and development. **Gazebo Harmonic** (the latest LTS release) provides a modular architecture designed for extensibility and performance.
+
+### 1.1 Why Simulate?
+
+Before deploying algorithms on physical robots, simulation offers critical advantages:
+
+| Benefit | Description |
+|---------|-------------|
+| **Safety** | Test dangerous scenarios without damaging expensive hardware |
+| **Speed** | Run faster-than-real-time experiments for rapid iteration |
+| **Reproducibility** | Reset to exact initial conditions for consistent testing |
+| **Cost** | Develop algorithms without continuous hardware access |
+| **Parallelization** | Run hundreds of simulation instances simultaneously |
+
+### 1.2 Gazebo Architecture
+
+Gazebo Harmonic uses a modular, plugin-based architecture:
+
+<div style={{textAlign: 'center', margin: '20px 0'}}>
+  <img src={require('./assets/diagrams/gazebo-architecture.svg').default} alt="Gazebo Architecture Diagram" style={{maxWidth: '100%'}} />
+</div>
+
+**Key Components:**
+
+1. **Physics Engine** - Simulates dynamics using ODE, DART, or Bullet
+2. **Rendering Engine** - Visualizes the world using OGRE 2.x
+3. **Sensor Systems** - Generates synthetic sensor data (LiDAR, cameras, IMU)
+4. **Transport Layer** - Enables inter-process communication via topics/services
+5. **SDF Parser** - Reads world and model definitions
+
+### 1.3 SDF vs URDF
+
+Gazebo uses **SDF (Simulation Description Format)** as its native format:
+
+| Feature | URDF | SDF |
+|---------|------|-----|
+| **Scope** | Single robot | Entire world + multiple models |
+| **Physics** | Limited parameters | Full physics control |
+| **Sensors** | External plugins | Built-in sensor support |
+| **Lights** | Not supported | Full lighting control |
+| **Nested models** | Not supported | Supported |
+
+<div style={{textAlign: 'center', margin: '20px 0'}}>
+  <img src={require('./assets/diagrams/urdf-sdf-workflow.svg').default} alt="URDF to SDF Workflow" style={{maxWidth: '100%'}} />
+</div>
+
+:::info URDF Compatibility
+Gazebo can load URDF files directly, converting them to SDF internally. For full simulation control, author in SDF directly.
+:::
+
+---
+
+## 2. SDF World File Structure
+
+Every Gazebo simulation starts with a **world file** that defines the environment, physics parameters, and included models.
+
+### 2.1 Minimal World Structure
+
+Let's examine a minimal SDF world:
+
+```xml title="examples/gazebo/worlds/minimal-world.sdf"
+<?xml version="1.0" ?>
+<sdf version="1.10">
+  <world name="minimal_world">
+
+    <!-- Physics Configuration -->
+    <physics type="ode">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+
+    <!-- Gravity (Z-down) -->
+    <gravity>0 0 -9.81</gravity>
+
+    <!-- Lighting -->
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <!-- Ground Plane -->
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+
+  </world>
+</sdf>
+```
+
+### 2.2 Key Elements Explained
+
+#### The `<world>` Element
+
+Every SDF file has a root `<sdf>` element containing one or more `<world>` elements:
+
+```xml
+<sdf version="1.10">
+  <world name="my_world">
+    <!-- World contents -->
+  </world>
+</sdf>
+```
+
+#### The `<model>` Element
+
+Models are the building blocks of simulation. Each model contains:
+
+- **Links**: Rigid bodies with mass and inertia
+- **Joints**: Connections between links (revolute, prismatic, fixed, etc.)
+- **Sensors**: Data-generating elements
+- **Plugins**: Custom behavior
+
+```xml
+<model name="simple_box">
+  <pose>0 0 0.5 0 0 0</pose>  <!-- x y z roll pitch yaw -->
+  <link name="link">
+    <inertial>
+      <mass>1.0</mass>
+      <inertia>
+        <ixx>0.167</ixx>
+        <iyy>0.167</iyy>
+        <izz>0.167</izz>
+      </inertia>
+    </inertial>
+    <collision name="collision">
+      <geometry>
+        <box><size>1 1 1</size></box>
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <geometry>
+        <box><size>1 1 1</size></box>
+      </geometry>
+    </visual>
+  </link>
+</model>
+```
+
+### 2.3 Pose and Coordinate Systems
+
+Gazebo uses a **right-handed, Z-up** coordinate system (matching ROS conventions):
+
+<div style={{textAlign: 'center', margin: '20px 0'}}>
+  <img src={require('./assets/diagrams/coordinate-systems.svg').default} alt="Coordinate Systems Comparison" style={{maxWidth: '100%'}} />
+</div>
+
+Poses are specified as `x y z roll pitch yaw`:
+
+```xml
+<!-- Object at position (1, 2, 0.5) rotated 45° around Z -->
+<pose>1 2 0.5 0 0 0.785</pose>
+```
+
+:::warning Rotation Units
+SDF uses **radians** for rotation angles. To convert degrees: `radians = degrees × π / 180`
+:::
+
+---
+
+## 3. Configuring Physics Properties
+
+Physics configuration dramatically affects simulation behavior and performance.
+
+### 3.1 Physics Engine Selection
+
+Gazebo supports multiple physics engines:
+
+<Tabs>
+<TabItem value="ode" label="ODE (Default)" default>
+
+```xml
+<physics type="ode">
+  <ode>
+    <solver>
+      <type>quick</type>
+      <iters>50</iters>
+    </solver>
+  </ode>
+</physics>
+```
+
+**Best for**: General purpose, stable, widely tested
+
+</TabItem>
+<TabItem value="dart" label="DART">
+
+```xml
+<physics type="dart">
+  <dart>
+    <solver>
+      <solver_type>dantzig</solver_type>
+    </solver>
+  </dart>
+</physics>
+```
+
+**Best for**: Articulated bodies, humanoid robots
+
+</TabItem>
+<TabItem value="bullet" label="Bullet">
+
+```xml
+<physics type="bullet">
+  <bullet>
+    <solver>
+      <iters>50</iters>
+    </solver>
+  </bullet>
+</physics>
+```
+
+**Best for**: Real-time applications, gaming
+
+</TabItem>
+</Tabs>
+
+### 3.2 Timestep Configuration
+
+The `max_step_size` parameter controls simulation accuracy vs. performance:
+
+<div style={{textAlign: 'center', margin: '20px 0'}}>
+  <img src={require('./assets/diagrams/physics-timestep-tradeoff.svg').default} alt="Physics Timestep Trade-offs" style={{maxWidth: '100%'}} />
+</div>
+
+```xml
+<physics type="ode">
+  <!-- Timestep: 1ms (1000 Hz) - recommended for humanoids -->
+  <max_step_size>0.001</max_step_size>
+
+  <!-- Real-time factor: 1.0 = real-time speed -->
+  <real_time_factor>1.0</real_time_factor>
+
+  <!-- Target updates per second -->
+  <real_time_update_rate>1000</real_time_update_rate>
+</physics>
+```
+
+| Step Size | Updates/sec | Use Case |
+|-----------|-------------|----------|
+| 0.0001s | 10,000 | High-precision, complex contacts |
+| **0.001s** | 1,000 | **Recommended for humanoids** |
+| 0.005s | 200 | Mobile robots, simple scenarios |
+| 0.01s | 100 | Quick testing only |
+
+:::caution Tunneling Problem
+Large timesteps can cause objects to "tunnel" through each other. If objects pass through floors, reduce `max_step_size`.
+:::
+
+### 3.3 Gravity Configuration
+
+Default gravity points down the Z-axis:
+
+```xml
+<!-- Earth gravity -->
+<gravity>0 0 -9.81</gravity>
+
+<!-- Moon gravity (1.62 m/s²) -->
+<gravity>0 0 -1.62</gravity>
+
+<!-- Mars gravity (3.71 m/s²) -->
+<gravity>0 0 -3.71</gravity>
+
+<!-- Zero gravity -->
+<gravity>0 0 0</gravity>
+```
+
+### 3.4 Surface Properties
+
+Surface properties control contact behavior:
+
+#### Friction
+
+```xml
+<surface>
+  <friction>
+    <ode>
+      <mu>1.0</mu>   <!-- Coulomb friction coefficient -->
+      <mu2>1.0</mu2> <!-- Secondary friction direction -->
+    </ode>
+  </friction>
+</surface>
+```
+
+| Material | Typical μ |
+|----------|-----------|
+| Rubber on concrete | 1.0 - 1.5 |
+| Wood on wood | 0.25 - 0.5 |
+| Steel on steel | 0.5 - 0.8 |
+| Ice | 0.01 - 0.05 |
+
+#### Restitution (Bounciness)
+
+```xml
+<surface>
+  <bounce>
+    <restitution_coefficient>0.9</restitution_coefficient>
+    <threshold>0.01</threshold>
+  </bounce>
+</surface>
+```
+
+- `0.0` = No bounce (clay)
+- `0.5` = Half energy retained (tennis ball)
+- `0.9` = High bounce (super ball)
+- `1.0` = Perfect bounce (physically impossible)
+
+### 3.5 Practical Example: Friction Demo
+
+The following world demonstrates friction differences:
+
+```xml title="examples/gazebo/worlds/collision-demo.sdf (excerpt)"
+<!-- High friction ramp (rubber-like) -->
+<model name="high_friction_ramp">
+  <static>true</static>
+  <pose>-1.5 0 0.25 0 0.3 0</pose>
+  <link name="link">
+    <collision name="collision">
+      <geometry>
+        <box><size>2 0.5 0.05</size></box>
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>100.0</mu>   <!-- Very high friction -->
+            <mu2>100.0</mu2>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+    <!-- visual omitted for brevity -->
+  </link>
+</model>
+
+<!-- Low friction ramp (ice-like) -->
+<model name="low_friction_ramp">
+  <static>true</static>
+  <pose>1.5 0 0.25 0 0.3 0</pose>
+  <link name="link">
+    <collision name="collision">
+      <geometry>
+        <box><size>2 0.5 0.05</size></box>
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>0.01</mu>   <!-- Very low friction -->
+            <mu2>0.01</mu2>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+  </link>
+</model>
+```
+
+**Try it:** Place identical boxes on each ramp and observe the different sliding behaviors.
+
+---
+
+## 4. Loading Robot Models
+
+### 4.1 The `<include>` Tag
+
+Use `<include>` to load external models:
+
+```xml
+<include>
+  <uri>model://humanoid_robot</uri>
+  <name>humanoid</name>
+  <pose>0 0 0.95 0 0 0</pose>
+</include>
+```
+
+**Important**: Set `GZ_SIM_RESOURCE_PATH` to include your models directory:
+
+```bash
+export GZ_SIM_RESOURCE_PATH=$GZ_SIM_RESOURCE_PATH:$(pwd)/models
+```
+
+### 4.2 Model Directory Structure
+
+Gazebo expects models in a specific structure:
+
+```
+models/
+└── humanoid_robot/
+    ├── model.config      # Model metadata
+    ├── model.sdf         # Model definition
+    └── meshes/           # Optional mesh files
+        ├── torso.dae
+        └── limb.dae
+```
+
+#### model.config
+
+```xml title="examples/gazebo/models/humanoid_robot/model.config"
+<?xml version="1.0"?>
+<model>
+  <name>Humanoid Robot</name>
+  <version>1.0</version>
+  <sdf version="1.10">model.sdf</sdf>
+  <author>
+    <name>Your Name</name>
+    <email>you@example.com</email>
+  </author>
+  <description>
+    A simplified humanoid robot for simulation.
+  </description>
+</model>
+```
+
+### 4.3 Spawning Models at Runtime
+
+You can spawn models into a running simulation:
+
+<Tabs>
+<TabItem value="service" label="Using gz Service" default>
+
+```bash
+# Spawn from model URI
+gz service -s /world/humanoid_world/create \
+    --reqtype gz.msgs.EntityFactory \
+    --reptype gz.msgs.Boolean \
+    --req "sdf_filename: 'model://humanoid_robot' \
+           name: 'robot_1' \
+           pose: {position: {x: 0, y: 0, z: 0.95}}"
+```
+
+</TabItem>
+<TabItem value="script" label="Using Script">
+
+```bash title="examples/gazebo/scripts/spawn-robot.bash"
+#!/bin/bash
+# Spawn a humanoid robot at specified position
+
+MODEL_NAME="${1:-humanoid_robot}"
+X="${2:-0}"
+Y="${3:-0}"
+Z="${4:-0.95}"
+
+export GZ_SIM_RESOURCE_PATH=$GZ_SIM_RESOURCE_PATH:$(pwd)/models
+
+gz service -s /world/humanoid_world/create \
+    --reqtype gz.msgs.EntityFactory \
+    --reptype gz.msgs.Boolean \
+    --timeout 5000 \
+    --req "sdf_filename: 'model://$MODEL_NAME' \
+           name: '${MODEL_NAME}_$(date +%s)' \
+           pose: {position: {x: $X, y: $Y, z: $Z}}"
+```
+
+</TabItem>
+</Tabs>
+
+### 4.4 Complete Humanoid World
+
+Here's a complete world file with physics-ready humanoid:
+
+```xml title="examples/gazebo/worlds/humanoid-world.sdf (excerpt)"
+<?xml version="1.0" ?>
+<sdf version="1.10">
+  <world name="humanoid_world">
+
+    <!-- Physics tuned for humanoid stability -->
+    <physics type="ode">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+      <ode>
+        <solver>
+          <type>quick</type>
+          <iters>100</iters>  <!-- Higher iterations for stability -->
+        </solver>
+      </ode>
+    </physics>
+
+    <gravity>0 0 -9.81</gravity>
+
+    <!-- Ground with walking-appropriate friction -->
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.0</mu>
+                <mu2>1.0</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+      </link>
+    </model>
+
+    <!-- Include the humanoid robot -->
+    <include>
+      <uri>model://humanoid_robot</uri>
+      <name>humanoid</name>
+      <pose>0 0 0.95 0 0 0</pose>
+    </include>
+
+  </world>
+</sdf>
+```
+
+---
+
+## 5. Verifying Physics Behavior
+
+### 5.1 Launching the Simulation
+
+```bash
+# Set resource path
+export GZ_SIM_RESOURCE_PATH=$GZ_SIM_RESOURCE_PATH:examples/gazebo/models
+
+# Launch with GUI
+gz sim examples/gazebo/worlds/humanoid-world.sdf
+
+# Launch headless (faster for testing)
+gz sim -s examples/gazebo/worlds/humanoid-world.sdf
+```
+
+### 5.2 Physics Verification Tests
+
+Perform these tests to verify correct physics behavior:
+
+#### Test 1: Gravity Response
+
+1. Launch `minimal-world.sdf`
+2. Spawn a sphere at height `z=2`
+3. **Expected**: Sphere falls and bounces based on restitution
+
+```bash
+# Check that gravity is working
+gz topic -e -t /world/minimal_world/dynamic_pose/info
+```
+
+#### Test 2: Friction Verification
+
+1. Launch `collision-demo.sdf`
+2. Observe boxes on high vs. low friction ramps
+3. **Expected**: Box on low friction ramp slides faster
+
+#### Test 3: Collision Detection
+
+1. Launch `world-with-objects.sdf`
+2. Observe objects falling onto the table
+3. **Expected**: Objects land on table, don't pass through
+
+### 5.3 Debugging Common Issues
+
+| Issue | Cause | Solution |
+|-------|-------|----------|
+| Objects fall through floor | Timestep too large | Reduce `max_step_size` |
+| Robot tips over | Friction too low | Increase `mu` values |
+| Jittering objects | Solver iterations too low | Increase `iters` |
+| Slow simulation | Timestep too small | Increase to 0.001s |
+| Model not loading | Path not in resource path | Check `GZ_SIM_RESOURCE_PATH` |
+
+### 5.4 ROS 2 Bridge Verification
+
+Verify Gazebo data reaches ROS 2:
+
+```bash
+# In terminal 1: Launch simulation with bridge
+ros2 launch digital_twin_examples digital_twin.launch.py
+
+# In terminal 2: Check topics
+ros2 topic list | grep -E "(pose|clock)"
+
+# In terminal 3: Echo pose data
+ros2 topic echo /world/humanoid_world/dynamic_pose/info
+```
+
+---
+
+## Exercises
+
+### Exercise 1: Create a Custom World
+
+Create a new world file with:
+- A 5-meter tall tower of stacked boxes
+- Moon gravity (1.62 m/s²)
+- High restitution ground (0.8)
+
+**Expected outcome**: Boxes fall slowly and bounce significantly.
+
+<details>
+<summary>Hint</summary>
+
+Use nested `<model>` elements with different `<pose>` values for stacking.
+
+</details>
+
+### Exercise 2: Friction Experiment
+
+Modify `collision-demo.sdf` to add a third ramp with medium friction (μ = 0.5).
+
+**Document**:
+1. How does the sliding speed compare?
+2. At what angle does the box start sliding?
+
+### Exercise 3: Real-Time Factor
+
+Experiment with `real_time_factor`:
+1. Set to `0.5` (slow motion)
+2. Set to `2.0` (double speed)
+3. Set to `0.0` (maximum speed)
+
+**Questions**:
+- How does visualization change?
+- When would you use each setting?
+
+### Exercise 4: Physics Engine Comparison
+
+Create three copies of `humanoid-world.sdf`, each using a different physics engine (ODE, DART, Bullet).
+
+**Compare**:
+- Simulation stability
+- Performance (FPS)
+- Joint behavior
+
+---
+
+## Assessment Questions
+
+1. **What is the recommended `max_step_size` for humanoid robot simulation and why?**
+
+2. **Explain the difference between `<collision>` and `<visual>` geometry. Can they differ?**
+
+3. **A robot's feet are sliding on the ground. What physics parameter should you adjust?**
+
+4. **What file format does Gazebo use natively, and how does it differ from URDF?**
+
+5. **Your simulation runs at 0.3 real-time factor. List three ways to improve performance.**
+
+---
+
+## Summary
+
+In this chapter, you learned to:
+
+- **Understand Gazebo's architecture** - Physics engine, rendering, sensors, and transport
+- **Create SDF world files** - Structure, models, poses, and includes
+- **Configure physics parameters** - Timestep, gravity, friction, and restitution
+- **Load robot models** - Using `<include>` and runtime spawning
+- **Verify physics behavior** - Testing gravity, friction, and collision
+
+## Next Steps
+
+In **Chapter 2: Unity for Human-Robot Interaction**, you'll learn to:
+- Import robot models into Unity
+- Create photorealistic indoor environments
+- Connect Unity to ROS 2 for bidirectional communication
+- Generate synthetic training data
+
+---
+
+## References
+
+1. Open Robotics. (2024). *Gazebo Sim Documentation*. https://gazebosim.org/docs/harmonic
+2. Open Robotics. (2024). *SDF Specification 1.10*. http://sdformat.org/spec
+3. Smith, R. (2006). *Open Dynamics Engine User Guide*. http://ode.org/
+4. Liu, K., et al. (2018). "DART: Dynamic Animation and Robotics Toolkit." *Journal of Open Source Software*.

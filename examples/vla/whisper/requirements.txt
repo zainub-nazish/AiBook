@@ -1,0 +1,24 @@
+# Whisper Voice-to-Action Requirements
+# Reference: https://github.com/openai/whisper
+
+# Core Whisper
+openai-whisper>=20231117
+
+# Audio processing
+soundfile>=0.12.1
+librosa>=0.10.1
+
+# Optional: faster-whisper for GPU acceleration
+# faster-whisper>=0.10.0
+
+# NumPy (compatible with Whisper)
+numpy>=1.24.0,<2.0.0
+
+# For microphone recording (optional)
+sounddevice>=0.4.6
+
+# For ROS 2 integration
+# rclpy  # Install via apt: ros-humble-rclpy
+
+# Development
+pytest>=7.4.0
