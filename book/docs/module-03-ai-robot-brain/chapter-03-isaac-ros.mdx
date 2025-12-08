@@ -375,7 +375,7 @@ local_costmap:
 
 **Not necessary for:**
 - Offline processing
-- Low-resolution input (<320x240)
+- Low-resolution input (&lt;320x240)
 - Simple 2D LiDAR SLAM
 - Single-task pipelines with relaxed timing
 
@@ -561,7 +561,7 @@ Result: ~10x speedup (28ms → 2.8ms per frame)
 1. Offline map building (no real-time requirement)
 2. 2D LiDAR SLAM (simpler algorithm, less data)
 3. Low-rate localization (1-5 Hz update rate)
-4. Low-resolution cameras (<320x240)
+4. Low-resolution cameras (&lt;320x240)
 5. Simple depth processing for slow-moving robots
 </details>
 
