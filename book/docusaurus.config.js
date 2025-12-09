@@ -23,7 +23,7 @@ const config = {
   url: 'https://your-username.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/physical-ai-robotics/',
+  baseUrl: '/',
 
   // GitHub pages deployment config.
   organizationName: 'your-username', // Usually your GitHub org/user name.
@@ -75,7 +75,7 @@ const config = {
         items: [
           {
             type: 'docSidebar',
-            sidebarId: 'bookSidebar',
+            sidebarId: 'tutorialSidebar',
             position: 'left',
             label: 'Textbook',
           },
@@ -130,7 +130,7 @@ const config = {
       prism: {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,
-        additionalLanguages: ['python', 'bash', 'xml', 'yaml', 'json'],
+        additionalLanguages: ['python', 'bash', 'markup', 'yaml', 'json'],
       },
     }),
 };
