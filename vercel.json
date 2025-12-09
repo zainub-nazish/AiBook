@@ -1,5 +1,0 @@
-{
-  "installCommand": "cd book && npm install",
-  "buildCommand": "cd book && npm run build",
-  "outputDirectory": "book/build"
-}
