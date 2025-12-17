@@ -43,6 +43,13 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+.venv/
+venv/
+.python-version
+
+# UV (Python package manager)
+.uv/
+uv.lock
 
 # ROS 2
 examples/ros2_ws/build/
