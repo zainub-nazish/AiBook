@@ -2,9 +2,9 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import styles from './styles.module.css';
 import type { ChatMessage, Source, QueryRequest, QueryResponse } from './types';
 
-// API configuration
+// API configuration - Hugging Face Spaces backend
 const API_URL = process.env.NODE_ENV === 'production'
-  ? 'https://your-api-domain.com'  // Update with your production API URL
+  ? 'https://zainubnazish-rag-chatbot.hf.space'
   : 'http://localhost:8000';
 
 const REQUEST_TIMEOUT = 30000; // 30 seconds
@@ -24,7 +24,7 @@ function generateId(): string {
 /**
  * Chat message bubble component
  */
-function MessageBubble({ message }: { message: ChatMessage }): JSX.Element {
+function MessageBubble({ message }: { message: ChatMessage }): React.JSX.Element {
   const isUser = message.role === 'user';
 
   if (message.isLoading) {
@@ -80,7 +80,7 @@ function MessageBubble({ message }: { message: ChatMessage }): JSX.Element {
 /**
  * Main ChatWidget component
  */
-export function ChatWidget(): JSX.Element {
+export function ChatWidget(): React.JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputValue, setInputValue] = useState('');
