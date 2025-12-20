@@ -20,14 +20,13 @@ const config = {
   },
 
   // Set the production url of your site here
-  url: 'https://your-username.github.io',
+  url: 'https://ai-book-flax.vercel.app',
   // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
 
-  // GitHub pages deployment config.
-  organizationName: 'your-username', // Usually your GitHub org/user name.
-  projectName: 'physical-ai-robotics', // Usually your repo name.
+  // Vercel deployment - sitemap will use the correct URL
+  organizationName: 'mali-shoaib', // GitHub org/user name.
+  projectName: 'book_ai', // Repo name.
 
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
